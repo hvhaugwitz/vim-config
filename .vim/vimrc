@@ -1,0 +1,234 @@
+"" pathogen
+if filereadable(expand("~/.vim/bundle/pathogen/autoload/pathogen.vim"))
+    runtime bundle/pathogen/autoload/pathogen.vim
+    execute pathogen#infect()
+endif
+
+"" general
+set nocompatible
+set autowrite
+set nomodeline
+set modelines=0
+set hidden
+set background=dark
+set wrap
+set nobackup
+set swapfile
+set notitle
+set nostartofline
+set mouse=
+set noerrorbells
+set undolevels=5000
+set history=250
+set report=0
+set fileformats=unix,dos,mac
+set backspace=indent,eol,start
+set browsedir=current
+set listchars=tab:>.,trail:.,eol:$,precedes:>,extends:<,nbsp:·
+set formatoptions=croql
+set viminfo='100,<500,s100,h,n~/.vim/viminfo
+set path=.,**
+syntax on
+filetype plugin indent on
+
+"" line numbers
+set number
+highlight clear CursorLine
+highlight LineNr ctermfg=grey
+highlight CursorLineNR cterm=bold ctermfg=yellow
+set cursorline
+
+"" encoding
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=ucs-bom,utf-8,default,latin1
+
+"" indent
+set autoindent
+set smartindent
+
+"" tabs
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set smarttab
+set expandtab
+
+"" search
+set hlsearch
+set incsearch
+set wrapscan
+set ignorecase
+set smartcase
+
+"" status line
+set laststatus=2
+
+"" last line
+set showmode
+set showcmd
+
+"" enhanced command-line completion
+set wildmenu
+set wildmode=longest,list:longest,list:full
+
+"" netrw
+" disable generation of .netrwhist
+let g:netrw_dirhistmax = 0
+" tree style listing
+let g:netrw_liststyle = 3
+
+"" split window
+set splitright
+set splitbelow
+
+"" clipboard
+" "* register: X PRIMARY selection
+" "+ register: X CLIPBOARD selection
+if has("clipboard")
+    set clipboard=exclude:cons\|linux
+endif
+
+"" printing
+set printheader=%<%t%h%m\ <%L>\ %{strftime('%Y-%m-%dT%H:%M:%S%z')}%=Page\ %N
+
+"" highlights
+highlight Todo ctermfg=black ctermbg=cyan
+highlight TabChar ctermbg=darkgray
+highlight UnwantedWhitespace ctermbg=red
+
+"" autocmds
+" close help page with <F1>
+autocmd FileType help nnoremap <buffer> <F1> :q<CR>
+" use :help in vim files for 'K' command
+autocmd FileType vim setlocal keywordprg=:help
+" resize splits when window is resized
+autocmd VimResized * wincmd =
+" jump to the last known position in a file just after opening it
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+" enable spell check for some file types
+autocmd FileType tex,mail,human,html,xhtml,gitcommit,svn silent! call SpellToggle()
+" disable paste mode when leaving insert mode
+autocmd InsertLeave * set nopaste
+" highlight tab chars
+autocmd BufWinEnter * call matchadd("TabChar" , '\t')
+" set textwidth
+autocmd Filetype text,human set textwidth=78
+" highlight unwanted white spaces
+autocmd BufWinEnter * call matchadd("UnwantedWhitespace", '\s\+$\| \+\ze\t')
+
+"" abbreviations
+iab _DATE        <C-R>=strftime("%Y-%m-%d")<CR>
+iab _TIME        <C-R>=strftime("%H:%M:%S")<CR>
+iab _HM          <C-R>=strftime("%H%M")<CR>
+iab _UNIX        <C-R>=strftime("%s")<CR>
+iab _ISO         <C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>
+iab _RFC         <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+
+"" mappings
+" paste toggle
+set pastetoggle=<F2>
+" toggle list mode
+noremap <silent><F3> :set invlist<CR>
+imap    <silent><F3> <ESC><F3>a
+" toggle line numbers
+noremap <silent><F4> :set invnu<CR>
+imap    <silent><F4> <ESC><F4>a
+" gundo toggle
+nnoremap <silent><F5> :GundoToggle<CR>
+" focus tagbar
+nnoremap <silent><F8> :TagbarOpen fjc<CR>
+" syntastic checker toggle
+noremap <silent><F9> :call SyntasticToggle()<CR>
+imap    <silent><F9> <ESC><F9>a
+function SyntasticToggle()
+    if (&ft=='perl')
+        if exists('b:syntastic_enable_perl_checker') && b:syntastic_enable_perl_checker
+            SyntasticReset
+            let b:syntastic_enable_perl_checker=0
+        else
+            let b:syntastic_enable_perl_checker=1
+            SyntasticCheck
+        endif
+    else
+        SyntasticToggleMode
+    endif
+endfunction
+" toggle spell
+noremap <silent><F10> :call SpellToggle()<CR>
+imap    <silent><F10> <ESC><F10>a
+
+" display previous/next error of the quickfix list
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+" display previous/next error of the location list
+nnoremap [l :lprevious<CR>
+nnoremap ]l :lnext<CR>
+
+" append single char without leaving normal mode
+nnoremap <silent><LEADER>a :exec "normal a".nr2char(getchar())."\e"<CR>
+" find file and :edit it
+noremap <LEADER>e :find<Space>
+" insert single char without leaving normal mode
+nnoremap <silent><LEADER>i :exec "normal i".nr2char(getchar())."\e"<CR>
+" display the contents of all numbered and named registers
+noremap <silent><LEADER>r :registers<CR>
+" replace <tab> characters with white spaces
+noremap <silent><LEADER>R :retab<CR>
+" find file and :sp it
+noremap <LEADER>s :sfind<Space>
+" find file and :vsp it
+noremap <LEADER>v :vert sfind<Space>
+" tagbar toggle
+nnoremap <silent><LEADER><F8> :TagbarToggle<CR>
+" turn off highlight matches for current search pattern
+nnoremap <silent><LEADER>/ :nohls<CR>
+" repeat last :!{cmd}
+nnoremap <LEADER>! :!!<CR>
+" remove trailing white spaces
+noremap <silent><LEADER><SPACE> :call DeleteTrailingWhitespaces()<CR>
+function DeleteTrailingWhitespaces()
+    execute '%substitute/\s\+$//e'
+    call histdel('search', -1) "see also :help function-search-undo
+endfunction
+
+" text-object for line without new line character
+vnoremap <silent>al :<C-U>normal! 0v$h<CR>
+omap <silent>al :normal val<CR>
+" text-object for line without surrounding spaces and new line character
+vnoremap <silent>il :<C-U>normal! ^vg_<CR>
+omap <silent>il :normal vil<CR>
+
+"" spell
+set sps=best,10
+let spelllangs = ["en", "de"]
+function SpellToggle()
+    if !exists('b:langidx') | let b:langidx = 0 | endif
+    if b:langidx == len(g:spelllangs)
+        setlocal nospell
+        echo "nospell"
+        let b:langidx = 0
+    else
+        execute "setlocal spelllang=".g:spelllangs[b:langidx]." spell"
+        echo "spell: " . &spelllang
+        let b:langidx = (b:langidx+1)
+    endif
+endfunction
+
+"" local vim options
+if filereadable(expand("~/.vim/vimrc.local"))
+    source ~/.vim/vimrc.local
+endif
+
+"" gundo options
+let g:gundo_width = 60
+let g:gundo_preview_height = 30
+
+"" syntastic options
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_perl_checkers = [ "perl" ]
+let g:syntastic_enable_perl_checker=0
