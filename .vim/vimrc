@@ -105,7 +105,7 @@ autocmd FileType vim setlocal keywordprg=:help
 " resize splits when window is resized
 autocmd VimResized * wincmd =
 " jump to the last known position in a file just after opening it
-autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+autocmd BufReadPost * if !&diff && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 " enable spell check for some file types
 autocmd FileType tex,mail,human,html,xhtml,gitcommit,svn silent! call SpellToggle()
 " disable paste mode when leaving insert mode
