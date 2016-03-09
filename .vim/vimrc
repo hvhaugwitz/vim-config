@@ -21,6 +21,7 @@ set noerrorbells
 set undolevels=5000
 set history=250
 set report=0
+set nrformats-=octal
 set fileformats=unix,dos,mac
 set backspace=indent,eol,start
 set browsedir=current
