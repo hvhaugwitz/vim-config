@@ -172,6 +172,8 @@ nnoremap <silent><LEADER>a :exec "normal a".nr2char(getchar())."\e"<CR>
 noremap <LEADER>e :find<Space>
 " insert single char without leaving normal mode
 nnoremap <silent><LEADER>i :exec "normal i".nr2char(getchar())."\e"<CR>
+" make file path directories as needed
+noremap <LEADER>M :! mkdir -pv %:h<CR>
 " display the contents of all numbered and named registers
 noremap <silent><LEADER>r :registers<CR>
 " replace <tab> characters with white spaces
