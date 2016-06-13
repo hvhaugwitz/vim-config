@@ -159,6 +159,9 @@ endfunction
 noremap <silent><F10> :call SpellToggle()<CR>
 imap    <silent><F10> <ESC><F10>a
 
+" go to previous/next file
+nnoremap [a :previous<CR>
+nnoremap ]a :next<CR>
 " go to previous/next buffer
 nnoremap <silent>[b :bprevious<CR>
 nnoremap <silent>]b :bnext<CR>
