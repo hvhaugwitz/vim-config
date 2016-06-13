@@ -229,6 +229,12 @@ if filereadable(expand("~/.vim/vimrc.local"))
     source ~/.vim/vimrc.local
 endif
 
+"" airline options
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 "" gundo options
 let g:gundo_width = 60
 let g:gundo_preview_height = 30
