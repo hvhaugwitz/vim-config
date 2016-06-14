@@ -197,8 +197,10 @@ nnoremap <LEADER>! :!!<CR>
 " remove trailing white spaces
 noremap <silent><LEADER><SPACE> :call DeleteTrailingWhitespaces()<CR>
 function DeleteTrailingWhitespaces()
+    let cursor_position = getpos(".")
     execute '%substitute/\s\+$//e'
     call histdel('search', -1) "see also :help function-search-undo
+    call setpos('.', cursor_position)
 endfunction
 
 " text-object for line without new line character
