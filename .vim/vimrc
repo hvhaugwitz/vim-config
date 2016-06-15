@@ -142,7 +142,7 @@ nnoremap <silent><F8> :TagbarOpen fjc<CR>
 " syntastic checker toggle
 noremap <silent><F9> :call SyntasticToggle()<CR>
 imap    <silent><F9> <ESC><F9>a
-function SyntasticToggle()
+function! SyntasticToggle()
     if (&ft=='perl')
         if exists('b:syntastic_enable_perl_checker') && b:syntastic_enable_perl_checker
             SyntasticReset
@@ -196,7 +196,7 @@ nnoremap <silent><LEADER>/ :nohls<CR>
 nnoremap <LEADER>! :!!<CR>
 " remove trailing white spaces
 noremap <silent><LEADER><SPACE> :call DeleteTrailingWhitespaces()<CR>
-function DeleteTrailingWhitespaces()
+function! DeleteTrailingWhitespaces()
     let cursor_position = getpos(".")
     execute '%substitute/\s\+$//e'
     call histdel('search', -1) "see also :help function-search-undo
@@ -213,7 +213,7 @@ omap <silent>il :normal vil<CR>
 "" spell
 set sps=best,10
 let spelllangs = ["en", "de"]
-function SpellToggle()
+function! SpellToggle()
     if !exists('b:langidx') | let b:langidx = 0 | endif
     if b:langidx == len(g:spelllangs)
         setlocal nospell
