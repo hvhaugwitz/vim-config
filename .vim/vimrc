@@ -186,6 +186,8 @@ noremap <silent><LEADER>r :registers<CR>
 noremap <silent><LEADER>R :retab<CR>
 " find file and :sp it
 noremap <LEADER>s :sfind<Space>
+" find file and :tabedit it
+noremap <LEADER>t :tabfind<Space>
 " find file and :vsp it
 noremap <LEADER>v :vert sfind<Space>
 " tagbar toggle
