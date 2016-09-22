@@ -242,6 +242,7 @@ let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 "" gundo options
 let g:gundo_width = 60
 let g:gundo_preview_height = 30
+let g:gundo_prefer_python3 = 1
 
 "" syntastic options
 let g:syntastic_always_populate_loc_list = 1
