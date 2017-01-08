@@ -125,6 +125,7 @@ iab _HM          <C-R>=strftime("%H%M")<CR>
 iab _UNIX        <C-R>=strftime("%s")<CR>
 iab _ISO         <C-R>=strftime("%Y-%m-%dT%H:%M:%S%z")<CR>
 iab _RFC         <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR>
+iab _~           Hannes von Haugwitz
 
 "" mappings
 " paste toggle
