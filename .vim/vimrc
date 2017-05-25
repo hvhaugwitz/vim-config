@@ -130,9 +130,6 @@ iab _~           Hannes von Haugwitz
 "" mappings
 " paste toggle
 set pastetoggle=<F2>
-" toggle list mode
-noremap <silent><F3> :set invlist<CR>
-imap    <silent><F3> <ESC><F3>a
 " toggle line numbers
 noremap <silent><F4> :set invnu<CR>
 imap    <silent><F4> <ESC><F4>a
@@ -159,6 +156,9 @@ endfunction
 " toggle spell
 noremap <silent><F10> :call SpellToggle()<CR>
 imap    <silent><F10> <ESC><F10>a
+" toggle list mode
+noremap <silent><F12> :set invlist<CR>
+imap    <silent><F12> <ESC><F12>a
 
 " go to previous/next file
 nnoremap [a :previous<CR>
