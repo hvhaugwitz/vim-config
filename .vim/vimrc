@@ -138,6 +138,23 @@ noremap <silent><F4> :set invnu<CR>
 imap    <silent><F4> <ESC><F4>a
 " gundo toggle
 nnoremap <silent><F5> :GundoToggle<CR>
+" auto indenting toggle
+noremap <silent><F7> :call AutoIndentingToggle()<CR>
+imap    <silent><F7> <ESC><F7>a
+function! AutoIndentingToggle()
+        if exists('b:oldindent')
+            let &l:autoindent=b:oldindent[0]
+            let &l:cindent=b:oldindent[1]
+            let &l:smartindent=b:oldindent[2]
+            let &l:indentexpr=b:oldindent[3]
+            unlet b:oldindent
+            echo "auto indenting re-enabled"
+        else
+            let b:oldindent=[ &autoindent, &cindent, &smartindent, &indentexpr ]
+            setlocal noautoindent nocindent nosmartindent indentexpr=
+            echo "auto indenting disabled"
+        endif
+endfunction
 " focus tagbar
 nnoremap <silent><F8> :TagbarOpen fjc<CR>
 " syntastic checker toggle
