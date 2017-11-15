@@ -243,7 +243,8 @@ function! SpellToggle()
         echo "nospell"
         let b:langidx = 0
     else
-        execute "setlocal spelllang=".g:spelllangs[b:langidx]." spell"
+        let &l:spelllang=g:spelllangs[b:langidx]
+        setlocal spell
         echo "spell: " . &spelllang
         let b:langidx = (b:langidx+1)
     endif
