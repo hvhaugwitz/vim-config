@@ -194,6 +194,8 @@ noremap <silent><LEADER>r :registers<CR>
 noremap <silent><LEADER>R :retab<CR>
 " find file and :sp it
 noremap <LEADER>s :sfind<Space>
+" sort lines based on visual selected block
+noremap <LEADER>S :'<,'>sort /\ze\%V/<CR>
 " find file and :tabedit it
 noremap <LEADER>t :tabfind<Space>
 " find file and :vsp it
