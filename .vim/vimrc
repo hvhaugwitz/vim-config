@@ -1,9 +1,3 @@
-"" pathogen
-if filereadable(expand("~/.vim/bundle/pathogen/autoload/pathogen.vim"))
-    runtime bundle/pathogen/autoload/pathogen.vim
-    execute pathogen#infect()
-endif
-
 "" general
 set nocompatible
 set autowrite
