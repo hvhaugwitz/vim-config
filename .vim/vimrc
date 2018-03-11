@@ -28,6 +28,7 @@ filetype plugin indent on
 
 "" line numbers
 set number
+set relativenumber
 
 " cursorline
 set cursorline
@@ -117,6 +118,9 @@ autocmd BufWinEnter * call matchadd("TabChar" , '\t')
 autocmd Filetype text,human set textwidth=78
 " highlight unwanted white spaces
 autocmd BufWinEnter * call matchadd("UnwantedWhitespace", '\s\+$\| \+\ze\t')
+" disable relative line numbers in insert mode and inactive windows
+autocmd WinEnter,InsertLeave * if &number | set relativenumber | endif
+autocmd WinLeave,InsertEnter * if &number | set norelativenumber | endif
 
 "" abbreviations
 iab _DATE        <C-R>=strftime("%Y-%m-%d")<CR>
@@ -134,7 +138,7 @@ set pastetoggle=<F2>
 noremap <silent><F3> :GitGutterToggle<CR>
 imap    <silent><F3> <ESC><F3>a
 " toggle line numbers
-noremap <silent><F4> :set invnu<CR>
+noremap <silent><F4> :set invnu invrnu<CR>
 imap    <silent><F4> <ESC><F4>a
 " gundo toggle
 nnoremap <silent><F5> :GundoToggle<CR>
