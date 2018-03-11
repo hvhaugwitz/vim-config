@@ -28,9 +28,8 @@ filetype plugin indent on
 
 "" line numbers
 set number
-highlight clear CursorLine
-highlight LineNr ctermfg=grey
-highlight CursorLineNR cterm=bold ctermfg=yellow
+
+" cursorline
 set cursorline
 
 "" encoding
@@ -88,9 +87,16 @@ endif
 set printheader=%<%t%h%m\ <%L>\ %{strftime('%Y-%m-%dT%H:%M:%S%z')}%=Page\ %N
 
 "" highlights
+" todo/fixme comments
 highlight Todo ctermfg=black ctermbg=cyan
+" tab character
 highlight TabChar ctermbg=darkgray
+" unwanted whitespaces
 highlight UnwantedWhitespace ctermbg=red
+" line numbers
+highlight clear CursorLine
+highlight LineNr ctermfg=grey
+highlight CursorLineNR cterm=bold ctermfg=yellow
 
 "" autocmds
 " close help page with <F1>
