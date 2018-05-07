@@ -121,6 +121,8 @@ autocmd BufWinEnter * call matchadd("UnwantedWhitespace", '\s\+$\| \+\ze\t')
 " disable relative line numbers in insert mode and inactive windows
 autocmd WinEnter,InsertLeave * if &number | set relativenumber | endif
 autocmd WinLeave,InsertEnter * if &number | set norelativenumber | endif
+" close loclist when associated buffer is closed
+autocmd QuitPre * if empty(&buftype) | lclose | endif
 
 "" abbreviations
 iab _DATE        <C-R>=strftime("%Y-%m-%d")<CR>
