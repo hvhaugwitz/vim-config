@@ -188,6 +188,8 @@ nnoremap ]l :lnext<CR>
 
 " append single char without leaving normal mode
 nnoremap <silent><LEADER>a :exec "normal a".nr2char(getchar())."\e"<CR>
+" delete current buffer
+noremap <LEADER>D :bdelete<CR>
 " find file and :edit it
 noremap <LEADER>e :find<Space>
 " open Grepper prompt
